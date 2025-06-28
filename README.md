@@ -26,6 +26,13 @@ Downloading copyrighted content from YouTube may violate its Terms of Service.
 
 Always ensure you have permission to download and use the content.
 
+## Installation
+### 1. Clone the repository
+```bash
+git clone https://github.com/thorbeorn/youtube-audio-downloader.git
+cd youtube-audio-downloader
+```
+
 ## 🧪 Usage
 ### Install dependencies:
 ```bash
