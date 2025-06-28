@@ -1,4 +1,5 @@
-import chromedriver_autoinstaller
+from youtube_requester import video
+
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -13,11 +14,10 @@ from selenium.webdriver.support import expected_conditions as EC
 def getAllVideoURLFromPlaylist(url) :
   if not (checkArgumentsTypeStrGetter(url)) : raise Exception("Unexpected exception from type of arguments")
 
-  parsed_url = getPlaylistURLFromVideo(url)
+  parsed_url = video.getPlaylistURLFromVideo(url)
   if not (parsed_url['noError']) : raise Exception("Unexpected exception on parsing playlist URL")
   url = parsed_url['url']
 
-  chromedriver_autoinstaller.install()
   soup = getPlaylistPagesHTML(url)
   if not (checkPlaylistAccess(soup)) : raise Exception("Unexpected exception on checking playlist access")
   if not (checkPlaylistIsNotEmpty(soup)) : raise Exception("Unexpected exception on checking playlist size")
@@ -29,11 +29,10 @@ def getAllVideoURLFromPlaylist(url) :
 def getVideoURLFromPlaylist(url, index) :
   if ((not (checkArgumentsTypeStrGetter(url))) or (not checkArgumentsTypeIntGetter(index))) : raise Exception("Unexpected exception from type of arguments")
   
-  parsed_url = getPlaylistURLFromVideo(url)
+  parsed_url = video.getPlaylistURLFromVideo(url)
   if not (parsed_url['noError']) : raise Exception("Unexpected exception on parsing playlist URL")
   url = parsed_url['url']
 
-  chromedriver_autoinstaller.install()
   soup = getPlaylistPagesHTML(url)
   if not (checkPlaylistAccess(soup)) : raise Exception("Unexpected exception on checking playlist access")
   if not (checkPlaylistIsNotEmpty(soup)) : raise Exception("Unexpected exception on checking playlist size")

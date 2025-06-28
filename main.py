@@ -1,5 +1,5 @@
 from youtube_requester import playlist, video
-from YT1Z import downloader
+from youtube_downloader import downloader
 
 url = "https://www.youtube.com/watch?v=2Vv-BfVoq4g&list=PLvlFnRiNEsRzdyUIy9DftHDfheWGRMkHL"
 
@@ -14,5 +14,5 @@ url = "https://www.youtube.com/watch?v=2Vv-BfVoq4g&list=PLvlFnRiNEsRzdyUIy9DftHD
 # if not (parsed_url['noError']) : raise Exception("Unexpected exception on parsing playlist URL")
 # print(parsed_url['url'])
 
-###############yt1z###############
-downloader.download(url)
+###############downloader###############
+print(downloader.download(url))
