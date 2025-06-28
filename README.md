@@ -32,16 +32,19 @@ Always ensure you have permission to download and use the content.
 pip install -r requirements.txt
 ```
 
-Edit the main.py file with your target YouTube URL:
+Edit the main.py file with your target YouTube URL and Folder (default: Create Download folder in current path):
 ```python
 from youtube_requester import playlist, video
 from youtube_downloader import canehill
 import os
 
-url = "https://www.youtube.com/watch?v=yoD7p3qZ3T0"
+url = "https://www.youtube.com"
 download_dir = os.path.join(os.getcwd(), "downloads")
 
+#For One Video
 print(canehill.download(url, download_dir))
+#For all playlist video
+print(downloader.downloadVideos(playlist.getAllVideoURLFromPlaylist(url), download_dir))
 ```
 Then run:
 ```bash

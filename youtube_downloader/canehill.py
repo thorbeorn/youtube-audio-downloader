@@ -66,13 +66,16 @@ def download(url, folder) :
   fichier = wait_for_download_complete(folder)
   driver.quit()
   
-  fichier = str(fichier)
-  part1 = fichier.split("ytdl.canehill.info - ")[0]
-  part2 = fichier.split("ytdl.canehill.info - ")[1]
-  temp = part1 + part2
-  part3 = temp.split(" (320 KBps)")[0]
-  part4 = temp.split(" (320 KBps)")[1]
-  os.rename(fichier, part3 + part4)
+  filename = os.path.basename(fichier)
+  if "ytdl.canehill.info - " in filename and " (320 KBps)" in filename:
+      try:
+          cleaned = filename.replace("ytdl.canehill.info - ", "").replace(" (320 KBps)", "")
+          cleaned_path = os.path.join(folder, cleaned)
+          os.rename(fichier, cleaned_path)
+          fichier = cleaned_path
+      except Exception as e:
+          raise(f"Erreur lors du renommage : {e}")
+
   return {
     "message": "Fichier téléchargé",
     "chemin": fichier
@@ -80,14 +83,23 @@ def download(url, folder) :
 
 #Wait and check the donwload file
 def wait_for_download_complete(folder, timeout=60):
+    # Liste des fichiers .mp3 AVANT le téléchargement
+    before = set(f for f in os.listdir(folder) if f.endswith('.mp3'))
+
     seconds = 0
     while seconds < timeout:
         files = os.listdir(folder)
         downloading = [f for f in files if f.endswith('.crdownload')]
         finished = [f for f in files if f.endswith('.mp3')]
 
-        if not downloading and finished:
-            return os.path.join(folder, finished[0])
+        if not downloading:
+            # Liste des fichiers .mp3 APRÈS
+            after = set(finished)
+            new_files = after - before
+            if new_files:
+                # Retourner le chemin du nouveau fichier
+                new_file = new_files.pop()
+                return os.path.join(folder, new_file)
 
         time.sleep(1)
         seconds += 1

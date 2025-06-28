@@ -1,9 +1,9 @@
 from youtube_requester import playlist, video
-from youtube_downloader import canehill
+from youtube_downloader import downloader
 
 import os
 
-url = "https://www.youtube.com/watch?v=yoD7p3qZ3T0&pp=ygUaYm9uYm9uIGEgbGEgbWVudGhlIGpvaydhaXI%3D"
+url = "https://www.youtube.com/watch?v=w8-izVQgNRk&list=PLvlFnRiNEsRzkWVIhUPDBvbpD2mBRrj8n"
 download_dir = os.path.join(os.getcwd(), "downloads")
 
 #############YT################
@@ -18,4 +18,5 @@ download_dir = os.path.join(os.getcwd(), "downloads")
 # print(parsed_url['url'])
 
 ###############downloader###############
-print(canehill.download(url, download_dir))
+# print(downloader.downloadVideo(url, download_dir))
+# print(downloader.downloadVideos(playlist.getAllVideoURLFromPlaylist(url), download_dir))
