@@ -1,3 +1,0 @@
-python3 -m pip install -U selenium
-python3 -m pip install chromedriver-autoinstaller
-python3 -m pip install bs4
